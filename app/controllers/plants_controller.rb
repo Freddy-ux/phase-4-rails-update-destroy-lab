@@ -1,4 +1,10 @@
 class PlantsController < ApplicationController
+  # PATCH /plants/:id
+  def update
+    plant = Plant.find(params[:id])
+    plant.update(plant_params)
+    render json: plant
+  end
 
   # GET /plants
   def index
@@ -10,6 +16,13 @@ class PlantsController < ApplicationController
   def show
     plant = Plant.find_by(id: params[:id])
     render json: plant
+  end
+
+  # DELETE /plants/:id
+  def destroy
+    plant = Plant.find(params[:id])
+    plant.destroy
+    head :no_content
   end
 
   # POST /plants
